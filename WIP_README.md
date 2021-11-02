@@ -33,7 +33,7 @@ As you can see, there hasn't been much time to implement the solution, but we've
 
 Having said that, you need to implement the cart logic with the following **requisites**:
 
-1. Have a **Checkout class** that **can** be instantiated. Make sure you include this in your final exercise. We **won't be able to consider the challenge** if you don't include this step.
+1. Have a **Checkout class** that **can** be instantiated. Make sure you include this in your final exercise. :rotating_light: We **won't consider the challenge as valid** if you don't include this step. :rotating_light:
 2. Implement the logic to add products to the checkout with a `scan` method, passing the product ID as `string` in his first argument.
 3. Implement a method `total`, that calculates the total price of the cart, which doesn't accept any arguments and will return that total price (with the discounts already applied) as a `number`.
    E.g:
@@ -53,7 +53,7 @@ You'll also need to add the presentation logic to update the "Order summary" sub
 As general guidelines, **take into account the following aspects:**
 
 - Feel free to add as many comments as you'd like. We know this is an open debate, but in this case, we'd rather understand why you did certain things, so be explicit about it, explaining what trade offs you had to do and why some things are included and others are left out.
-- Deliver production ready code. This can be a bit ambiguous, and we don't want you to stress about it. As we said, deliver something that you'd be comfortable with having in your production environment.
+- Deliver production ready code. This can be a bit ambiguous, and we don't want you to stress about it. As we said, deliver something that you'd be comfortable with having in your production environment, taking into account the whole development workflow.
 - Your solution should be scalable, so build your code in a way that can be easy to grow and easy to add new functionality.
 - You're free to add any UX/UI improvements you might consider, even though we'll focus on the requested features.
 - As stated before, feel free to ask anything you have doubts about, act as a product owner.
