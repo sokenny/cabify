@@ -75,4 +75,4 @@ As general guidelines, **take into account the following aspects:**
 - Your solution should be scalable, so build your code in a way that can be easy to grow and easy to add new functionality.
 - You're free to add any UX/UI improvements you might consider, even though we'll focus on the requested features.
 - As stated before, feel free to ask anything you have doubts about, act as a product owner.
-- [BONUS]: Our UI engineers didn't have time to work on another feature we'd love to have. When clicking on a certain product, a modal should show up with the details of the said item. You'll find everything you need under the `/bonus` folder. It would be a plus if you could implement it.
+- [BONUS]: Our UI engineers didn't have time to work on another feature we'd love to have. When clicking on a certain product, a modal should show up with the details of the said item. You'll find here the [UI design](https://www.figma.com/file/V3rITSBo9U30ESJeLnSarF/Frontend-challenge?node-id=0%3A1) and all the assets you will need inside `/bonus` folder. It would be a plus if you could implement it.
