@@ -4,7 +4,7 @@ We welcome you to the first step in your hiring process at Cabify (Yayyy! :tada:
 
 That last process will give us an idea of how it would be working with you, but first, we want to make sure that you have the technical skills needed to work here, and we think the following challenge is great for that.
 
-First and foremost, **read this document carefully**, as we want to make sure all the implementation details are well understood. As you will see in the explanation, there are some things that we **require you **to implement to consider this** exercise valid**. If you have any doubts after reading it, don't hesitate to ask your go-to person. We mean it, we try to be as concise and transparent as possible, but if you think something is not clear enough, please reach us and we'll be super glad in answering all your questions.
+First and foremost, **read this document carefully**, as we want to make sure all the implementation details are well understood. As you will see in the explanation, there are some things that we **require you** to implement to consider this **exercise valid**. If you have any doubts after reading it, don't hesitate to ask your go-to person. We mean it, we try to be as concise and transparent as possible, but if you think something is not clear enough, please reach out to us and we'll be super happy to answer all your questions.
 
 As a time estimate, we consider this should take you between 6 to 8 hours to complete. That doesn't mean you **have** to do it in that time. You might take more or less time. The important thing here is that you deliver something that you would happily deploy to production (except on a Friday, of course). We're well aware that even 8 hours is a long time to dedicate to something like this, but we think this is the best way to check whether you'd be a good fit.
 
@@ -27,7 +27,7 @@ We allow the users the possibility of having some discounts applied when combini
 - 2-for-1 promotions: (for `MUG` items). Buy two of them, get one free. (e.g: pay 10€ for 4 mugs)
 - Bulk discounts: (for `TSHIRT` items). Buying 3 or more of this product, the price per unit is reduced by 5%. (e.g: if you buy 3 or more `TSHIRT` items, the price per unit should be 19.00€)
 
-Having said that, you need to implement the solution with the following **requisites**:
+Having said that, you need to implement the solution with the following **requirements**:
 
 1. Create a **Checkout class** that **can** be instantiated. Make sure you include this in your final exercise. :rotating_light: We **won't consider the challenge valid** if you don't include this step. :rotating_light:
 
