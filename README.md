@@ -58,23 +58,25 @@ Having said that, you need to implement the solution with the following **requir
    const totalPrice = co.total();
    ```
 
-1. As you can see, there hasn't been much time to implement the solution, but we've managed to deliver the markup and a basic implementation of the styles with vanilla _HTML_ and _CSS_. With the help of the **Checkout class** you have implemented previously, build the checkout page, ensuring that the users can interact with the products and the "Order summary" subsection is updated whenever one of them is added or removed.
-
-<img src="./example.png" width="500" alt="UI wireframe" />
-
+1. As you can see, there hasn't been much time to implement the solution, but we've managed to deliver the markup and a [basic implementation of the styles](./example.png) with vanilla _HTML_ and _CSS_. With the help of the **Checkout class** you have implemented previously, build the checkout page, ensuring that the users can interact with the products and the "Order summary" subsection is updated whenever one of them is added or removed.
 Apart from that, we ask you to decompose the markup into components or whatever suits you better to make your final application a production-ready App.
 
-You'll also need to add the presentation logic to update the "Order summary" subsection whenever a product is added or removed. Use the `Checkout` class to get the total and the discounts that are being applied.
+To be clear, we will pay attention to the following aspects in this order (hint: the first elements are the more important):
+
+1. `Checkout` class solution.
+2. How do you implement `Checkout` class into the UI.
+3. UI and components.
+4. Bonus (see below).
 
 As general guidelines, **take into account the following aspects:**
 
-- Feel free to add as many comments as you'd like. We know this is an open debate, but in this case, we'd rather understand why you did certain things, **so be explicit about it**, explaining what trade-offs you had to do and why some things are included and others are left out.
+- We appreciate you explaining the challenge you just created. We know challenge decisions are an open debate, we'd rather understand why you did certain things, **so be explicit about it**, explaining what trade-offs you had to do and why some things are included and others are left out.
 - Deliver production-ready code. This can be a bit ambiguous, and we don't want you to stress about it. As we said, deliver something that you'd be comfortable with having in your production environment, taking into account the whole development workflow.
 - Your solution **should be scalable**, so build your code in a way that can be easy to grow and easy to add new functionality.
 - As stated before, feel free to ask anything you have doubts about, and act as a product owner.
 - [BONUS]: Our UI engineers didn't have time to work on another feature we'd love to have. When clicking on a certain product, a modal should show up with the details of the said item. You'll find here the [UI design](https://www.figma.com/file/V3rITSBo9U30ESJeLnSarF/Frontend-challenge?node-id=0%3A1) and all the assets you will need inside `/bonus` folder. It would be a plus if you could implement it.
 
-Concerning the technical guidelines, before submitting the challenge checks the next bullet points:
+**IMPORTANT**: Concerning the technical guidelines, before submitting the challenge, check the next bullet points:
 
 - [ ] The code must build and execute on a Unix platform.
 - [ ] The code must be submitted in _Gitlab_ repo, in _master_ branch, **and avoid using a different branch**. Only _master_ branch should remain.
