@@ -71,7 +71,7 @@ To be clear, we will pay attention to the following aspects in this order (hint:
 
 As general guidelines, **take into account the following aspects:**
 
-- We appreciate you explaining the challenge you just created. We know challenge decisions are an open debate, we'd rather understand why you did certain things, **so be explicit about it**, explaining what trade-offs you had to do and why some things are included and others are left out.
+- We appreciate you explaining the challenge you just created. We know challenge decisions are subjective matters and something can be discussed, we'd rather understand why you did certain things, **so be explicit about it**, explaining what trade-offs you had to do and why some things are included and others are left out.
 - Deliver production-ready code. This can be a bit ambiguous, and we don't want you to stress about it. As we said, deliver something that you'd be comfortable with having in your production environment, taking into account the whole development workflow.
 - Your solution **should be scalable**, so build your code in a way that can be easy to grow and easy to add new functionality.
 - As stated before, feel free to ask anything you have doubts about, and act as a product owner.
