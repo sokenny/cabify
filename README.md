@@ -64,9 +64,10 @@ Apart from that, we ask you to decompose the markup into components or whatever 
 To be clear, we will pay attention to the following aspects in this order (hint: the first elements are the more important):
 
 1. `Checkout` class solution.
-2. How do you implement `Checkout` class into the UI.
-3. UI and components.
-4. Bonus (see below).
+1. How do you implement `Checkout` class into the UI.
+1. UI and components.
+1. Production readiness.
+1. Bonus (see below).
 
 As general guidelines, **take into account the following aspects:**
 
