@@ -29,7 +29,7 @@ We allow the users the possibility of having some discounts applied when combini
 
 Having said that, you need to implement the solution with the following **requirements**:
 
-1. Create a **Checkout class** that **can** be instantiated. Make sure you include this in your final exercise. :rotating_light: We **won't consider the challenge valid** if you don't include this step. :rotating_light:
+1. Create a **Checkout class** that **can** be instantiated. Make sure you include this in your final exercise. :rotating_light: We **won't consider the challenge valid** if you don't fulfill the below requirements. :rotating_light:
 
    Without taking into account the framework of your choice, try to implement **at least** the following interface. Feel free to add any extra constructor, properties, or methods you consider necessary for your provided solution:
 
