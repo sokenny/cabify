@@ -13,24 +13,24 @@ export function AppProvider(props:any){
     const [products, setProducts] = useState<Product[]>([
         {
             id: 1,
-            name: 'Shirt',
+            name: 'Cabify T-Shirt',
             price: 20,
             image: 'products/shirt.png',
-            code: 'X7R2OPX',
+            code: 'TSHIRT',
           },
           {
             id: 2,
-            name: 'Mug',
+            name: 'Cabify Coffee Mug',
             price: 5,
             image: 'products/mug.png',
-            code: 'X2G2OPZ',
+            code: 'MUG',
           },
           {
             id: 3,
-            name: 'Cap',
+            name: 'Cabify Cap',
             price: 10,
             image: 'products/cap.png',
-            code: 'X3W2OPY',
+            code: 'CAP',
           },
     ]);
 

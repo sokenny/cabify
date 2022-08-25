@@ -1,10 +1,14 @@
-import type { NextPage } from 'next';
-import type { Product } from '../types';
-import { useAppContext } from '../contexts/AppContext';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import type { NextPage } from "next";
+import type { Product } from "../types";
+import { useAppContext } from "../contexts/AppContext";
+import { Checkout } from "../utils/cart";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 
-const ProductRow:React.FC<{product:Product}> = ({product}) => {
+const ProductRow: React.FC<{ product: Product; checkout: Checkout }> = ({
+  product,
+  checkout,
+}) => {
   return (
     <li className="product row">
       <div className="col-product">
@@ -18,24 +22,28 @@ const ProductRow:React.FC<{product:Product}> = ({product}) => {
       </div>
       <div className="col-quantity">
         <button className="count">-</button>
-        <input type="text" className="product-quantity" value="3" />
-        <button className="count">
-          +
-        </button>
+        <input
+          type="text"
+          className="product-quantity"
+          value={checkout.itemQty(product.code)}
+        />
+        <button className="count">+</button>
       </div>
       <div className="col-price">
         <span className="product-price">{product.price}</span>
         <span className="product-currency currency">€</span>
       </div>
       <div className="col-total">
-        <span className="product-price">60</span>
+        <span className="product-price">
+          {checkout.itemTotal(product.code)}
+        </span>
         <span className="product-currency currency">€</span>
       </div>
     </li>
-  )
-}
+  );
+};
 
-const TableHead:React.FC = () => {
+const TableHead: React.FC = () => {
   return (
     <ul className="products-list tableHead">
       <li className="products-list-title row">
@@ -45,70 +53,84 @@ const TableHead:React.FC = () => {
         <div className="col-total">Total</div>
       </li>
     </ul>
-  )
-}
+  );
+};
 
-const ProductsList:React.FC<{products:Product[]}> = ({products}) => {
+const ProductsList: React.FC<{ products: Product[]; checkout: Checkout }> = ({
+  products,
+  checkout,
+}) => {
   return (
     <div>
       <TableHead />
       <ul className="products-list">
-        {products.map((product) => (
-          <ProductRow product={product} key={product.id} />
-        ))}          
+        {products.map(product => (
+          <ProductRow product={product} checkout={checkout} key={product.id} />
+        ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-const Button:React.FC<{children:string}> = ({children}) => {
-  return (
-    <button type="submit">{children}</button>
-  )
-}
+const Button: React.FC<{ children: string }> = ({ children }) => {
+  return <button type="submit">{children}</button>;
+};
 
-const OrderSummary:React.FC = () => {
+const OrderSummary: React.FC<{ checkout: Checkout }> = ({ checkout }) => {
   return (
     <aside className="summary">
       <h1 className="main">Order Summary</h1>
       <ul className="summary-items wrapper border">
         <li>
-          <span className="summary-items-number">11 Items</span
-          ><span className="summary-items-price"
-            >120<span className="currency">€</span></span
-          >
+          <span className="summary-items-number">11 Items</span>
+          <span className="summary-items-price">
+            {checkout.total()}
+            <span className="currency">€</span>
+          </span>
         </li>
       </ul>
       <div className="summary-discounts wrapper-half border">
         <h2>Discounts</h2>
         <ul>
-          <li><span>2x1 Mug offer</span><span>-10€</span></li>
-          <li><span>x3 Shirt offer</span><span>-3€</span></li>
-          <li><span>Promo code</span><span>0€</span></li>
+          <li>
+            <span>2x1 Mug offer</span>
+            <span>-10€</span>
+          </li>
+          <li>
+            <span>x3 Shirt offer</span>
+            <span>-3€</span>
+          </li>
+          <li>
+            <span>Promo code</span>
+            <span>0€</span>
+          </li>
         </ul>
       </div>
       <div className="summary-total wrapper">
         <ul>
           <li>
-            <span className="summary-total-cost">Total cost</span
-            ><span className="summary-total-price">107€</span>
+            <span className="summary-total-cost">Total cost</span>
+            <span className="summary-total-price">{checkout.total()}€</span>
           </li>
         </ul>
         <Button>Checkout</Button>
       </div>
     </aside>
-  )
-}
-
+  );
+};
 
 const Cart: NextPage = () => {
-
   const { products } = useAppContext();
+
+  const checkout = new Checkout();
+  checkout.scan("TSHIRT").scan("CAP").scan("TSHIRT");
+  console.log("Total: ", checkout.total());
+  console.log("Cart: ", checkout.cart);
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Cart | Cabify Store</title>
         <meta name="description" content="Generated by create next app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -116,12 +138,12 @@ const Cart: NextPage = () => {
       <main className="App">
         <section className="products">
           <h1 className="main">Shopping cart</h1>
-          <ProductsList products={products} />
+          <ProductsList products={products} checkout={checkout} />
         </section>
-        <OrderSummary />
+        <OrderSummary checkout={checkout} />
       </main>
     </div>
-  )
-}
+  );
+};
 
 export default Cart;
