@@ -1,9 +1,110 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from 'next';
+import type { Product } from '../types';
+import { useAppContext } from '../contexts/AppContext';
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
 
-const Home: NextPage = () => {
+const ProductRow:React.FC<{product:Product}> = ({product}) => {
+  return (
+    <li className="product row">
+      <div className="col-product">
+        <figure className="product-image">
+          <img src={product.image} alt="Shirt" />
+          <div className="product-description">
+            <h1>{product.name}</h1>
+            <p className="product-code">Product code {product.code}</p>
+          </div>
+        </figure>
+      </div>
+      <div className="col-quantity">
+        <button className="count">-</button>
+        <input type="text" className="product-quantity" value="3" />
+        <button className="count">
+          +
+        </button>
+      </div>
+      <div className="col-price">
+        <span className="product-price">{product.price}</span>
+        <span className="product-currency currency">€</span>
+      </div>
+      <div className="col-total">
+        <span className="product-price">60</span>
+        <span className="product-currency currency">€</span>
+      </div>
+    </li>
+  )
+}
+
+const TableHead:React.FC = () => {
+  return (
+    <ul className="products-list tableHead">
+      <li className="products-list-title row">
+        <div className="col-product">Product details</div>
+        <div className="col-quantity">Quantity</div>
+        <div className="col-price">Price</div>
+        <div className="col-total">Total</div>
+      </li>
+    </ul>
+  )
+}
+
+const ProductsList:React.FC<{products:Product[]}> = ({products}) => {
+  return (
+    <div>
+      <TableHead />
+      <ul className="products-list">
+        {products.map((product) => (
+          <ProductRow product={product} key={product.id} />
+        ))}          
+      </ul>
+    </div>
+  )
+}
+
+const Button:React.FC<{children:string}> = ({children}) => {
+  return (
+    <button type="submit">{children}</button>
+  )
+}
+
+const OrderSummary:React.FC = () => {
+  return (
+    <aside className="summary">
+      <h1 className="main">Order Summary</h1>
+      <ul className="summary-items wrapper border">
+        <li>
+          <span className="summary-items-number">11 Items</span
+          ><span className="summary-items-price"
+            >120<span className="currency">€</span></span
+          >
+        </li>
+      </ul>
+      <div className="summary-discounts wrapper-half border">
+        <h2>Discounts</h2>
+        <ul>
+          <li><span>2x1 Mug offer</span><span>-10€</span></li>
+          <li><span>x3 Shirt offer</span><span>-3€</span></li>
+          <li><span>Promo code</span><span>0€</span></li>
+        </ul>
+      </div>
+      <div className="summary-total wrapper">
+        <ul>
+          <li>
+            <span className="summary-total-cost">Total cost</span
+            ><span className="summary-total-price">107€</span>
+          </li>
+        </ul>
+        <Button>Checkout</Button>
+      </div>
+    </aside>
+  )
+}
+
+
+const Cart: NextPage = () => {
+
+  const { products } = useAppContext();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,61 +113,15 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+      <main className="App">
+        <section className="products">
+          <h1 className="main">Shopping cart</h1>
+          <ProductsList products={products} />
+        </section>
+        <OrderSummary />
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   )
 }
 
-export default Home
+export default Cart;
