@@ -12,8 +12,12 @@ export interface ICheckout {
    * @param code The product identifier
    * @returns itself to allow function chaining
    */
-  scan(code: string): this;
+  subscribe(stateVariable: any): any;
+  subscriptions: any[];
+  products: Product[];
   cart: string[];
+  scan(code: string): any;
+  remove(code: string): this;
   /**
    * Returns the value of all cart products with the discounts applied.
    */

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import type { NextPage } from "next";
 import type { Product } from "../types";
 import { useAppContext } from "../contexts/AppContext";
@@ -9,6 +10,13 @@ const ProductRow: React.FC<{ product: Product; checkout: Checkout }> = ({
   product,
   checkout,
 }) => {
+  const handleScan = () => {
+    checkout.scan(product.code);
+  };
+  const handleRemove = () => {
+    checkout.remove(product.code);
+  };
+
   return (
     <li className="product row">
       <div className="col-product">
@@ -16,18 +24,25 @@ const ProductRow: React.FC<{ product: Product; checkout: Checkout }> = ({
           <img src={product.image} alt="Shirt" />
           <div className="product-description">
             <h1>{product.name}</h1>
-            <p className="product-code">Product code {product.code}</p>
+            <p className="product-code">
+              Product code {checkout.itemQty(product.code)} {product.code}
+            </p>
           </div>
         </figure>
       </div>
       <div className="col-quantity">
-        <button className="count">-</button>
+        <button className="count" onClick={handleRemove}>
+          -
+        </button>
         <input
           type="text"
           className="product-quantity"
           value={checkout.itemQty(product.code)}
+          readOnly
         />
-        <button className="count">+</button>
+        <button className="count" onClick={handleScan}>
+          +
+        </button>
       </div>
       <div className="col-price">
         <span className="product-price">{product.price}</span>
@@ -65,7 +80,11 @@ const ProductsList: React.FC<{ products: Product[]; checkout: Checkout }> = ({
       <TableHead />
       <ul className="products-list">
         {products.map(product => (
-          <ProductRow product={product} checkout={checkout} key={product.id} />
+          <ProductRow
+            product={product}
+            checkout={checkout}
+            key={product.code}
+          />
         ))}
       </ul>
     </div>
@@ -76,7 +95,8 @@ const Button: React.FC<{ children: string }> = ({ children }) => {
   return <button type="submit">{children}</button>;
 };
 
-const OrderSummary: React.FC<{ checkout: Checkout }> = ({ checkout }) => {
+const OrderSummary: React.FC = () => {
+  const { checkout } = useAppContext();
   return (
     <aside className="summary">
       <h1 className="main">Order Summary</h1>
@@ -120,12 +140,10 @@ const OrderSummary: React.FC<{ checkout: Checkout }> = ({ checkout }) => {
 };
 
 const Cart: NextPage = () => {
-  const { products } = useAppContext();
+  const { products, checkout } = useAppContext();
 
-  const checkout = new Checkout();
-  checkout.scan("TSHIRT").scan("CAP").scan("TSHIRT");
-  console.log("Total: ", checkout.total());
-  console.log("Cart: ", checkout.cart);
+  const [cart, setCart] = useState<string[]>(checkout.cart);
+  checkout.subscribe(setCart);
 
   return (
     <div className={styles.container}>
@@ -140,7 +158,7 @@ const Cart: NextPage = () => {
           <h1 className="main">Shopping cart</h1>
           <ProductsList products={products} checkout={checkout} />
         </section>
-        <OrderSummary checkout={checkout} />
+        <OrderSummary />
       </main>
     </div>
   );
