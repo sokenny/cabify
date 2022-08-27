@@ -14,10 +14,19 @@
     .colProduct{
         width: $colProductWidth;
 
+        @include mobile{
+            width: 40%;
+        }
+
         .image{
             display: flex;
             align-items: center;
             flex-flow: row nowrap;
+
+            @include mobile{
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
             img{
                 margin-right: $pxs2;
@@ -25,6 +34,12 @@
                 height: $pxs9;
                 border: 1px solid #cacad1;
                 border-radius: 4px;
+
+                @include mobile{
+                    width: $pxs5;
+                    height: $pxs5;
+                    margin-bottom: $pxs1;
+                }
             }
 
             .description{

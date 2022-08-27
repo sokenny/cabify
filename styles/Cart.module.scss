@@ -17,13 +17,24 @@
         background-color: #ffffff;
         transform: translate(-50%, -50%);
 
+        @include mobile{
+            flex-direction: column;
+        }
+
         .products{
             flex: 1 1;
             padding: $pxs5 $pxs3 $pxs5 $pxs7;
+            
+            @include mobile{
+                padding: $pxs5 $pxs2 $pxs5 $pxs2;
+            }
 
             h1{
                 padding-bottom: 16px;
                 border-bottom: 1px solid rgba(33, 34, 64, 0.16);
+                font-size: 18px;
+                line-height: 24px;
+                letter-spacing: -0.18px;
             }
         }
     }

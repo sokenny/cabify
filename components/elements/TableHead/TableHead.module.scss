@@ -23,6 +23,10 @@
 
         .colProduct{
             width: $colProductWidth;
+
+            @include mobile{
+                width: 40%;
+            }
         }
 
         .colQuantity{
