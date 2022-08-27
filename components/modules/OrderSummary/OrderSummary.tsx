@@ -12,7 +12,7 @@ const OrderSummary: React.FC = () => {
           <span>11 Items</span>
           <span>
             {checkout.grossTotal()}
-            <span className="currency">€</span>
+            <span className={styles.currency}>€</span>
           </span>
         </li>
       </ul>
