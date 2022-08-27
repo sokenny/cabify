@@ -1,3 +1,30 @@
-.ProductsTable{
+@import './variables';
+
+.Cart{
     
+    main{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-width: 1088px;
+        max-height: 648px;
+        width: calc(100% - 64px);
+        height: calc(100% - 64px);
+        border-radius: 4px;
+        background-color: #ffffff;
+        transform: translate(-50%, -50%);
+
+        .products{
+            flex: 1 1;
+            padding: $pxs5 $pxs3 $pxs5 $pxs7;
+
+            h1{
+                padding-bottom: 16px;
+                border-bottom: 1px solid rgba(33, 34, 64, 0.16);
+            }
+        }
+    }
 }

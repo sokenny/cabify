@@ -1,0 +1,98 @@
+@import '../../../styles/variables';
+
+.OrderSummary{
+    display: flex;
+    flex-flow: column wrap;
+    padding: $pxs5 $pxs4;
+    width: 312px;
+    background-color: #f3f3f3;
+    color: #212240;
+
+    >*{
+        width: 100%;
+    }
+
+    h2, .discounts, .items{
+        border-bottom: 1px solid rgba(33, 34, 64, 0.16);
+    }
+
+    h2{
+        padding-bottom: $pxs2;
+        position: relative;
+        letter-spacing: -0.18px;
+        font-size: 18px;
+        line-height: $pxs3;
+    }
+
+    .items, .discounts, .total{
+        padding: $pxs4 0;    
+    }
+
+    .items{
+        li{
+            display: flex;
+            justify-content: space-between;
+
+            >*:last-child{
+                font-weight: bold;
+            }
+        }
+    }
+
+    .discounts{
+        >div:first-child{
+            color: #717285;
+            font-size: 12px;
+            text-transform: uppercase;
+            line-height: $pxs2;
+        }
+
+        ul{
+            margin-top: $pxs2;
+
+            li{
+                display: flex;
+                justify-content: space-between;
+                font-size: 14px;
+                margin-top: 20px;
+
+                span:last-child{
+                    font-weight: bold;
+                }
+            }
+
+            li:first-child{
+                margin-top: 0;
+            }
+        }
+    }
+
+    .total{
+        align-self: flex-end;
+        margin-top: auto;
+        padding-top: $pxs2;
+        padding-bottom: 0;
+        border-top: 1px solid rgba(33, 34, 64, 0.16);
+        color: color(secondary);
+
+        ul{
+            li{
+                display: flex;
+                justify-content: space-between;
+
+                .cost{
+                    flex-basis: 100%;
+                    text-transform: uppercase;
+                    font-size: 14px;
+                    line-height: 17px;
+                }
+        
+                .price{
+                    font-weight: bold;
+                    font-size: 20px;
+                    line-height: 25px;
+                }
+            }
+        }
+    }
+}

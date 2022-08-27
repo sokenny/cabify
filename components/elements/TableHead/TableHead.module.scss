@@ -1,0 +1,43 @@
+@import '../../../styles/variables';
+
+.TableHead{
+    position: relative;
+    width: 100%;
+    padding: $pxs4 0;
+
+    .headers{
+        position: relative;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        color: #a6a7b3;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 10px;
+        line-height: 16px;
+
+        >div{
+            display: flex;
+            align-items: center;
+        }
+
+        .colProduct{
+            width: $colProductWidth;
+        }
+
+        .colQuantity{
+            width: $colQuantityWidth;
+            justify-content: center;
+        }
+
+        .colPrice{
+            width: $colPriceWidth;
+            justify-content: center;
+        }
+
+        .colTotal{
+            width: $colTotalWidth;
+            justify-content: center;
+        }
+    }
+}

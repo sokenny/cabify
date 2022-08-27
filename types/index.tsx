@@ -6,22 +6,26 @@ export type Product = {
   code: string;
 };
 
+export type Discount = {
+  type: "2-for-1" | "bulk";
+  code: string;
+  shouldBuy?: number;
+  shouldDiscount?: number;
+};
+
 export interface ICheckout {
-  /**
-   * Scans a product adding it to the current cart.
-   * @param code The product identifier
-   * @returns itself to allow function chaining
-   */
+  discounts: Discount[];
   subscribe(stateVariable: any): any;
   subscriptions: any[];
   products: Product[];
   cart: string[];
   scan(code: string): any;
   remove(code: string): this;
-  /**
-   * Returns the value of all cart products with the discounts applied.
-   */
-  total(): number;
   itemTotal(code: string): number;
   itemQty(code: string): number;
+  getDiscountsApplied(): any[];
+  getDiscountRow(discount: Discount): any;
+  totalDiscounted(): number;
+  grossTotal(): number;
+  total(): number;
 }

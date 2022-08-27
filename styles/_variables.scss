@@ -1,0 +1,29 @@
+$pxs1: 8px;
+$pxs2: 16px;
+$pxs3: 24px;
+$pxs4: 32px;
+$pxs5: 40px;
+$pxs6: 48px;
+$pxs7: 56px;
+$pxs8: 64px;
+$pxs9: 72px;
+
+$colProductWidth: 45%;
+$colQuantityWidth: 20%;
+$colPriceWidth: 20%;
+$colTotalWidth: 15%;
+
+$colors : (
+    primary: #7350ff,
+    secondary: #212240, 
+);
+
+@function color ($color-name) {
+    @return map-get($colors, $color-name)
+}
+
+@mixin mobile {
+    @media (max-width: #{800px}) {
+        @content;
+    }
+}

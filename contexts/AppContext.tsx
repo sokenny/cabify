@@ -1,11 +1,10 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Checkout } from "../utils/cart";
-import type { Product } from "../types";
+import type { Discount, Product } from "../types";
 
 interface AppContextInterface {
   products: Product[];
   checkout: Checkout;
-  setCheckout: React.Dispatch<React.SetStateAction<Checkout>>;
 }
 
 const AppContext = React.createContext<AppContextInterface | null>(null);
@@ -36,16 +35,27 @@ export function AppProvider(props: any) {
     },
   ]);
 
-  // const checkout = new Checkout(products);
-  const [checkout, setCheckout] = useState<Checkout>(new Checkout(products));
+  const discounts: Discount[] = [
+    {
+      type: "2-for-1",
+      code: "MUG",
+    },
+    {
+      type: "bulk",
+      code: "TSHIRT",
+      shouldBuy: 3,
+      shouldDiscount: 5,
+    },
+  ];
+
+  const checkout = new Checkout(products, discounts);
 
   const value = useMemo(() => {
     return {
       products,
       checkout,
-      setCheckout,
     };
-  }, [products, checkout, setCheckout]);
+  }, [products, checkout]);
 
   return <AppContext.Provider value={value} {...props} />;
 }

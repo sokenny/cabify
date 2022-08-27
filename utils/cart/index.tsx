@@ -1,26 +1,25 @@
-import { Dispatch, SetStateAction } from "react";
-import type { ICheckout, Product } from "../../types";
+import type { ICheckout, Product, Discount } from "../../types";
 
 export class Checkout implements ICheckout {
   public cart: string[];
   public products: Product[];
   public subscriptions: any[];
+  public discounts: Discount[];
 
-  constructor(products: Product[], cart: string[] = []) {
-    this.cart = cart;
+  constructor(products: Product[], discounts: Discount[] = []) {
+    this.cart = [];
     this.products = products;
     this.subscriptions = [];
+    this.discounts = discounts;
   }
 
   scan(code: string): this {
-    console.log("Called scan with code: ", code);
     const product = this.products.find(product => product.code === code);
     if (product) {
       this.cart.push(product.code);
     } else {
       throw new Error("Product not found");
     }
-    // if this.subscriptions is not undefined, call all subscriptions
     this.subscriptions.forEach(subscription => {
       subscription([...this.cart]);
     });
@@ -32,13 +31,12 @@ export class Checkout implements ICheckout {
     if (index !== -1) {
       this.cart.splice(index, 1);
     }
-    // if (this.subscribe !== undefined) {
-    //   this.subscribe([...this.cart]);
-    // }
+    this.subscriptions.forEach(subscription => {
+      subscription([...this.cart]);
+    });
     return this;
   }
 
-  // Add subscribe method that receives function and pushes it to subscriptions array
   subscribe(stateVariable: any): any {
     this.subscriptions.push(stateVariable);
   }
@@ -58,7 +56,54 @@ export class Checkout implements ICheckout {
     return quantity;
   }
 
-  total(): number {
+  getDiscountsApplied(): any[] {
+    const discountsApplied: any[] = [];
+    const uniqueProducts = this.cart.filter(
+      (item, index) => this.cart.indexOf(item) === index
+    );
+    uniqueProducts.forEach(code => {
+      const discount = this.discounts.find(discount => discount.code === code);
+      if (discount !== undefined) {
+        if (discount.type === "bulk" && discount.shouldBuy) {
+          if (this.itemQty(code) >= discount.shouldBuy) {
+            discountsApplied.push(this.getDiscountRow(discount));
+          }
+        } else if (discount.type === "2-for-1") {
+          const amountOfDiscounts = Math.floor(this.itemQty(code) / 2);
+          for (let i = 0; i < amountOfDiscounts; i++) {
+            discountsApplied.push(this.getDiscountRow(discount));
+          }
+        }
+      }
+    });
+    return discountsApplied;
+  }
+
+  getDiscountRow(discount: Discount): any {
+    const product = this.products.find(
+      product => product.code === discount.code
+    );
+    if (!product) throw new Error("Product not found");
+    const prefix = discount.type === "2-for-1" ? `2x1` : discount.shouldBuy;
+    const label = `${prefix} ${product?.name} offer`;
+    const totalProductPrice = product?.price * this.itemQty(product?.code);
+    const priceDiscounted =
+      discount.type === "2-for-1"
+        ? product?.price
+        : totalProductPrice *
+          (discount.shouldDiscount ? discount.shouldDiscount / 100 : 1);
+    return { label, priceDiscounted };
+  }
+
+  totalDiscounted(): number {
+    const discounts = this.getDiscountsApplied();
+    const totalDiscounted = discounts.reduce((acc, discount) => {
+      return acc + discount.priceDiscounted;
+    }, 0);
+    return totalDiscounted;
+  }
+
+  grossTotal(): number {
     const total = this.cart.reduce((acc, code) => {
       const product = this.products.find(product => product.code === code);
       if (product) {
@@ -67,5 +112,9 @@ export class Checkout implements ICheckout {
       return acc;
     }, 0);
     return total;
+  }
+
+  total(): number {
+    return this.grossTotal() - this.totalDiscounted();
   }
 }

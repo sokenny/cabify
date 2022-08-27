@@ -185,21 +185,6 @@ h1.main {
   border-bottom: 1px solid rgba(33, 34, 64, 0.16);
 }
 
-h2,
-.products-list li.products-list-title {
-  color: #a6a7b3;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 10px;
-  line-height: 16px;
-}
-
-h2,
-.product-code {
-  font-size: 12px;
-  line-height: 16px;
-}
-
 .product-quantity,
 .summary input,
 .summary ul li,
@@ -217,16 +202,6 @@ h2,
 .summary-total-price {
   font-size: 20px;
   line-height: 25px;
-}
-
-h2 {
-  color: #717285;
-  letter-spacing: 0;
-  font-weight: 300;
-}
-
-h2 + * {
-  margin-top: 16px;
 }
 
 body {
@@ -255,13 +230,6 @@ body {
   border-radius: 4px;
   background-color: #ffffff;
   transform: translate(-50%, -50%);
-}
-
-h1 {
-  position: relative;
-  letter-spacing: -0.18px;
-  font-size: 18px;
-  line-height: 24px;
 }
 
 .wrapper {
@@ -340,10 +308,10 @@ input {
   flex: 1;
 }
 
-.products-list {
+/* .products-list {
   position: relative;
   width: 100%;
-}
+} */
 
 .product-image {
   display: flex;
@@ -475,7 +443,7 @@ input {
   font-weight: bold;
 }
 
-.summary button[type="submit"] {
+/* .summary button[type="submit"] {
   margin-top: 24px;
   padding-top: 16px;
   padding-bottom: 16px;
@@ -487,4 +455,4 @@ input {
   font-weight: bold;
   line-height: 14px;
   cursor: pointer;
-}
+} */

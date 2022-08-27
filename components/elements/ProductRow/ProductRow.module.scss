@@ -1,0 +1,105 @@
+@import '../../../styles/variables';
+
+.ProductRow{
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    >div{
+        display: flex;
+        align-items: center;
+    }
+
+    .colProduct{
+        width: $colProductWidth;
+
+        .image{
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+
+            img{
+                margin-right: $pxs2;
+                width: $pxs9;
+                height: $pxs9;
+                border: 1px solid #cacad1;
+                border-radius: 4px;
+            }
+
+            .description{
+
+                h3, .code{
+                    font-size: $pxs2;
+                    line-height: $pxs3;
+                }
+
+                h3{
+                    color: color(primary);
+                }
+
+                .code{
+                    border-radius: 4px;
+                    color: #a6a7b3;
+                    letter-spacing: 0.13px;
+                    font-weight: 400;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    .colQuantity{
+        width: $colQuantityWidth;
+        justify-content: center;
+
+        .count{
+            padding: 0 8px;
+            height: $pxs5;
+            border: none;
+            background: transparent;
+            color: color(primary);
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 25px;
+        }
+
+        .quantity{
+            width: $pxs5;
+            height: $pxs5;
+            border: 2px solid #dbdbe0;
+            border-radius: 4px;
+            text-align: center;
+            appearance: none;
+        }
+    }
+
+    .colPrice{
+        width: $colPriceWidth;
+        justify-content: center;
+    }
+
+    .colTotal{
+        width: $colTotalWidth;
+        justify-content: center;
+    }
+
+    .price,.currency{
+        color: #000000;
+        font-size: $pxs2;
+    }
+
+    .currency{
+        margin-left: 4px;
+    }
+
+}
+
+.ProductRow{
+    margin-top: $pxs4;
+}
+
+.ProductRow:first-child{
+    margin-top: 0;
+}
