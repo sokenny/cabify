@@ -1,10 +1,15 @@
+import { ReactNode } from "react";
+
 export type Product = {
   id: number;
   name: string;
   price: number;
-  image: string;
+  images: [string, string];
+  description: string;
   code: string;
 };
+
+export type Modal = ReactNode | false;
 
 export type Discount = {
   type: "2-for-1" | "bulk";

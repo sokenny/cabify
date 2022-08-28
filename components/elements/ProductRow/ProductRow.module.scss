@@ -13,6 +13,7 @@
 
     .colProduct{
         width: $colProductWidth;
+        cursor: pointer;
 
         @include mobile{
             width: 40%;
@@ -55,7 +56,7 @@
 
                 .code{
                     border-radius: 4px;
-                    color: #a6a7b3;
+                    color: color(gray);
                     letter-spacing: 0.13px;
                     font-weight: 400;
                     font-size: 12px;

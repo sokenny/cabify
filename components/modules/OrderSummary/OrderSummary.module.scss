@@ -17,7 +17,7 @@
     }
 
     h2, .discounts, .items{
-        border-bottom: 1px solid rgba(33, 34, 64, 0.16);
+        border-bottom: 1px solid color(lightGray);
     }
 
     h2{
@@ -28,7 +28,7 @@
         line-height: $pxs3;
     }
 
-    .items, .discounts, .total{
+    .items, .total{
         padding: $pxs4 0;    
     }
 
@@ -49,6 +49,10 @@
     }
 
     .discounts{
+        padding: $pxs3 0;
+        max-height: 270px;
+        overflow-y: auto;
+
         >div:first-child{
             color: #717285;
             font-size: 12px;
@@ -76,15 +80,28 @@
         }
     }
 
+    .discounts::-webkit-scrollbar {
+        width: 4px;
+    }
+       
+    .discounts::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+    }
+    
+    .discounts::-webkit-scrollbar-thumb {
+        background-color: color(primary);
+    }
+
     .total{
         align-self: flex-end;
         margin-top: auto;
         padding-top: $pxs2;
         padding-bottom: 0;
-        border-top: 1px solid rgba(33, 34, 64, 0.16);
+        border-top: 1px solid color(lightGray);
         color: color(secondary);
 
         ul{
+            margin-bottom: $pxs3;
             li{
                 display: flex;
                 justify-content: space-between;

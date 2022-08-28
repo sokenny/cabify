@@ -1,10 +1,12 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { Checkout } from "../utils/cart";
-import type { Discount, Product } from "../types";
+import type { Discount, Product, Modal } from "../types";
 
 interface AppContextInterface {
   products: Product[];
   checkout: Checkout;
+  modal: Modal;
+  setModal: (modal: Modal) => void;
 }
 
 const AppContext = React.createContext<AppContextInterface | null>(null);
@@ -16,24 +18,31 @@ export function AppProvider(props: any) {
       id: 1,
       name: "Cabify T-Shirt",
       price: 20,
-      image: "products/shirt.png",
+      images: ["/products/shirt-min.png", "/products/shirt.jpg"],
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales semper elit sit amet interdum. Praesent volutpat sed elit vel consectetur. Nulla tempus tincidunt ex, sit amet semper ipsum imperdiet varius. In rutrum aliquam nisl, sagittis faucibus felis bibendum id.",
       code: "TSHIRT",
     },
     {
       id: 2,
       name: "Cabify Coffee Mug",
       price: 5,
-      image: "products/mug.png",
+      images: ["/products/mug-min.png", "/products/mug.jpg"],
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales semper elit sit amet interdum. Praesent volutpat sed elit vel consectetur. Nulla tempus tincidunt ex, sit amet semper ipsum imperdiet varius. In rutrum aliquam nisl, sagittis faucibus felis bibendum id.",
       code: "MUG",
     },
     {
       id: 3,
       name: "Cabify Cap",
       price: 10,
-      image: "products/cap.png",
+      images: ["/products/cap-min.png", "/products/cap.jpg"],
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales semper elit sit amet interdum. Praesent volutpat sed elit vel consectetur. Nulla tempus tincidunt ex, sit amet semper ipsum imperdiet varius. In rutrum aliquam nisl, sagittis faucibus felis bibendum id.",
       code: "CAP",
     },
   ]);
+  const [modal, setModal] = useState<Modal>(false);
 
   const discounts: Discount[] = [
     {
@@ -54,8 +63,10 @@ export function AppProvider(props: any) {
     return {
       products,
       checkout,
+      modal,
+      setModal,
     };
-  }, [products, checkout]);
+  }, [products, checkout, modal, setModal]);
 
   return <AppContext.Provider value={value} {...props} />;
 }

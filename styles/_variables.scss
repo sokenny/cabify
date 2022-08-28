@@ -15,7 +15,11 @@ $colTotalWidth: 15%;
 
 $colors : (
     primary: #7350ff,
+    primaryDark: #5a3fda,
     secondary: #212240, 
+    gray: #a6a7b3,
+    lightGray: rgba(33, 34, 64, 0.16),
+    black: #1A1A38
 );
 
 @function color ($color-name) {

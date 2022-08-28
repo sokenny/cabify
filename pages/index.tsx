@@ -7,8 +7,7 @@ import OrderSummary from "../components/modules/OrderSummary/OrderSummary";
 import styles from "../styles/Cart.module.scss";
 
 const Cart: NextPage = () => {
-  const { products, checkout } = useAppContext();
-
+  const { products, checkout, modal } = useAppContext();
   const [cart, setCart] = useState<string[]>(checkout.cart);
   checkout.subscribe(setCart);
 
@@ -20,6 +19,7 @@ const Cart: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        {modal && modal}
         <section className={styles.products}>
           <h1>Shopping cart</h1>
           <ProductsTable products={products} checkout={checkout} />

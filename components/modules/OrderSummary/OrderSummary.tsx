@@ -9,7 +9,7 @@ const OrderSummary: React.FC = () => {
       <h2>Order Summary</h2>
       <ul className={styles.items}>
         <li>
-          <span>11 Items</span>
+          <span>{checkout.cart.length} Items</span>
           <span>
             {checkout.grossTotal()}
             <span className={styles.currency}>€</span>

@@ -1,3 +1,5 @@
+import { useAppContext } from "../../../contexts/AppContext";
+import ProductDetailModal from "../../modules/ProductDetailModal/ProductDetailModal";
 import { Product } from "../../../types";
 import { Checkout } from "../../../utils/cart";
 import styles from "./ProductRow.module.scss";
@@ -6,18 +8,21 @@ const ProductRow: React.FC<{ product: Product; checkout: Checkout }> = ({
   product,
   checkout,
 }) => {
-  const handleScan = () => {
+  const { setModal } = useAppContext();
+  function handleScan() {
     checkout.scan(product.code);
-  };
-  const handleRemove = () => {
+  }
+  function handleRemove() {
     checkout.remove(product.code);
-  };
-
+  }
+  function handleClickProduct() {
+    setModal(<ProductDetailModal product={product} />);
+  }
   return (
     <li className={styles.ProductRow}>
-      <div className={styles.colProduct}>
+      <div className={styles.colProduct} onClick={handleClickProduct}>
         <figure className={styles.image}>
-          <img src={product.image} alt="Shirt" />
+          <img src={product.images[0]} alt="Shirt" />
           <div className={styles.description}>
             <h3>{product.name}</h3>
             <p className={styles.code}>Product code {product.code}</p>

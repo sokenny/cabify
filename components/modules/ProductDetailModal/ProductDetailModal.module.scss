@@ -1,0 +1,76 @@
+@import '../../../styles/variables';
+
+.ProductDetailModal{
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: #ffffff;
+    display: flex;
+    position: relative;
+    color: color(black);
+
+    @include mobile{
+        flex-direction: column;
+    }
+
+    .close{
+        position: absolute;
+        top: $pxs4;
+        right: $pxs4;
+        cursor: pointer;
+    }
+
+    .image, .info{
+        height: 100%;
+    }
+
+    .image{
+        width: 70%;
+        background-color: gray;
+        position: relative;
+        
+        @include mobile{
+            width: 100%;
+        }
+    }
+
+    .info{
+        width: 30%;
+        background-color: white;
+        border-left: 1px solid color(lightGray);
+        padding: $pxs4;
+        padding-top: $pxs9 * 2;
+        font-size: 13px;
+
+        @include mobile{
+            width: 100%;
+            padding-top: $pxs8;
+        }
+
+        ul:first-child{
+            margin-bottom: $pxs3;
+
+            li{
+                display: flex;
+                justify-content: space-between;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: $pxs3;
+                padding-bottom: $pxs2;
+                border-bottom: 1px solid color(lightGray);
+            }
+        }
+
+        .description{
+            padding-bottom: $pxs6;
+            line-height: 18px;
+            border-bottom: 1px solid color(lightGray);
+            margin-bottom: $pxs2;;
+        }
+
+        .code{
+            color: color(gray);
+            margin-bottom: $pxs5;
+        }
+    }
+}
