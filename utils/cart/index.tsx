@@ -1,9 +1,14 @@
-import type { ICheckout, Product, Discount } from "../../types";
+import type {
+  ICheckout,
+  Product,
+  Discount,
+  AppliedDiscount,
+} from "../../types";
 
 export class Checkout implements ICheckout {
   public cart: string[];
   public products: Product[];
-  public subscriptions: any[];
+  public subscriptions: React.Dispatch<React.SetStateAction<string[]>>[];
   public discounts: Discount[];
 
   constructor(products: Product[], discounts: Discount[] = []) {
@@ -37,7 +42,9 @@ export class Checkout implements ICheckout {
     return this;
   }
 
-  subscribe(stateVariable: any): any {
+  subscribe(
+    stateVariable: React.Dispatch<React.SetStateAction<string[]>>
+  ): void {
     this.subscriptions.push(stateVariable);
   }
 
@@ -56,8 +63,8 @@ export class Checkout implements ICheckout {
     return quantity;
   }
 
-  getDiscountsApplied(): any[] {
-    const discountsApplied: any[] = [];
+  getDiscountsApplied(): AppliedDiscount[] {
+    const discountsApplied: AppliedDiscount[] = [];
     const uniqueProducts = this.cart.filter(
       (item, index) => this.cart.indexOf(item) === index
     );
@@ -79,7 +86,7 @@ export class Checkout implements ICheckout {
     return discountsApplied;
   }
 
-  getDiscountRow(discount: Discount): any {
+  getDiscountRow(discount: Discount): AppliedDiscount {
     const product = this.products.find(
       product => product.code === discount.code
     );

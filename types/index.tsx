@@ -18,18 +18,25 @@ export type Discount = {
   shouldDiscount?: number;
 };
 
+export type AppliedDiscount = {
+  label: string;
+  priceDiscounted: number;
+};
+
 export interface ICheckout {
   discounts: Discount[];
-  subscribe(stateVariable: any): any;
-  subscriptions: any[];
+  subscribe(
+    stateVariable: React.Dispatch<React.SetStateAction<string[]>>
+  ): void;
+  subscriptions: React.Dispatch<React.SetStateAction<string[]>>[];
   products: Product[];
   cart: string[];
-  scan(code: string): any;
+  scan(code: string): this;
   remove(code: string): this;
   itemTotal(code: string): number;
   itemQty(code: string): number;
-  getDiscountsApplied(): any[];
-  getDiscountRow(discount: Discount): any;
+  getDiscountsApplied(): AppliedDiscount[];
+  getDiscountRow(discount: Discount): AppliedDiscount;
   totalDiscounted(): number;
   grossTotal(): number;
   total(): number;
