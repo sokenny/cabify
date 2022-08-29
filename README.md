@@ -24,7 +24,22 @@ To Run in Prod:
 
 The store has a shared state living in `/contexts/AppContext.tsx`. Its main responsibility is to provide the global data that might be needed across different UIs (not only the cart). Many lower level components require this data so I chose to place it in a shared state **to avoid heavy prop drilling**.
 
-The App is initialized by the async `initializeApp` function that will fetch the current products and discounts data from a db and update the state with them.
+The App is initialized by the async `initializeApp` function that will fetch the current products and discounts data from a db and update the state with them. Once this data is available, our checkout class is re-instanced and populated with the new data.
+
+```typescript
+useEffect(() => {
+  async function initializeApp() {
+    const [products, discounts] = await Promise.all([
+      getProducts(),
+      getDiscounts(),
+    ]);
+    if (products) setProducts(products);
+    if (discounts) setDiscounts(discounts);
+    setCheckout(new Checkout(products, discounts));
+  }
+  initializeApp();
+}, []);
+```
 
 If it were about building the individual product pages or homepage, I would be fetching the products from a `getStaticProps` function to get SSG pages. But at checkout I consider that the latest real time data about a product is needed (latest stock info, latest price, etc) and this is **hard to grant with SSG**. So our final source of truth to validate the checkout must be the fetched API data.
 <br />
@@ -52,7 +67,7 @@ The first one was to go with a **functional-oriented pattern** and make the chec
 const [checkout, setCheckout] = useState(new Checkout(products, discounts));
 ```
 
-To grant immutability, for every item added to the cart, the `checkout` state variable is updated through `handleAddItem` handler:
+To grant immutability, for every item added to the cart, the `checkout` state variable would be updated through `handleAddItem` handler:
 
 ```typescript
 function handleAddItem() {
@@ -69,22 +84,24 @@ scan(code: string) {
 }
 ```
 
-In this scenario I would not be abiding to the requested checkout interface which demands that scan returns `this`. Therefore the idea was dismissed and I implemented an **Observer pattern**.
+In this scenario I would not be abiding to the requested checkout interface which demands that scan returns `this`. Therefore the idea was slightly modified with the use of an **Observer pattern**.
 
 A `subscribe()` method was added to the `checkout` class:
 
 ```typescript
-subscribe(
-    stateVariable: React.Dispatch<React.SetStateAction<string[]>>
-  ): void;
+subscribe(setter: (cart: Cart) => void): void;
 ```
 
 ```typescript
-const [cart, setCart] = useState<string[]>(checkout.cart);
-checkout.subscribe(setCart);
+const [checkout, setCheckout] = useState<Checkout>(
+  new Checkout(products, discounts)
+);
+checkout.subscribe((cart: Cart) =>
+  setCheckout(new Checkout(products, discounts, cart))
+);
 ```
 
-`subscribe` takes a `setState` variable that will receive the updated cart. It is then pushed to the `subscriptions` array property inside checkout. For every `checkout.cart` update, the subscriptions are notified of the change:
+`subscribe` takes a setter that will receive the updated cart. It is then pushed to the `subscriptions` array property inside checkout. For every `checkout.cart` update, the subscriptions are notified of the change:
 
 ```typescript
 this.subscriptions.forEach(subscription => {
@@ -92,7 +109,7 @@ this.subscriptions.forEach(subscription => {
 });
 ```
 
-This way we can bind our state to changes in the `checkout` class and keep a synchronized UI.
+This way we can bind our state to changes in the `checkout` class, keep a synchronized UI and stay within an immutable functional-oriented pattern.
 <br/>
 <br/>
 
