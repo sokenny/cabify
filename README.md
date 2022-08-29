@@ -16,6 +16,8 @@ To Run in Prod:
 
 `npm run build && npm start`
 
+You can view this app live at: https://cabify.vercel.app/ 🥳
+
 <br />
 
 # Project decisions and tradeoffs
