@@ -8,7 +8,7 @@ import styles from "../styles/Cart.module.scss";
 
 const Cart: NextPage = () => {
   const { products, checkout, modal } = useAppContext();
-  const [cart, setCart] = useState<string[]>(checkout.cart);
+  const [cart, setCart] = useState<string[]>([]);
   checkout.subscribe(setCart);
 
   return (
