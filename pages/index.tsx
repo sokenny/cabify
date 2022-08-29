@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import type { NextPage } from "next";
 import { useAppContext } from "../contexts/AppContext";
 import Head from "next/head";
@@ -8,8 +8,6 @@ import styles from "../styles/Cart.module.scss";
 
 const Cart: NextPage = () => {
   const { products, checkout, modal } = useAppContext();
-  const [cart, setCart] = useState<string[]>([]);
-  checkout.subscribe(setCart);
 
   return (
     <div className={styles.Cart}>

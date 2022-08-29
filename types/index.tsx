@@ -23,14 +23,16 @@ export type AppliedDiscount = {
   priceDiscounted: number;
 };
 
+export type Cart = string[];
+
+export type Subscriptions = { (cart: Cart): void }[];
+
 export interface ICheckout {
   discounts: Discount[];
-  subscribe(
-    stateVariable: React.Dispatch<React.SetStateAction<string[]>>
-  ): void;
-  subscriptions: React.Dispatch<React.SetStateAction<string[]>>[];
+  subscribe(setter: (cart: Cart) => void): void;
+  subscriptions: Subscriptions;
   products: Product[];
-  cart: string[];
+  cart: Cart;
   scan(code: string): this;
   remove(code: string): this;
   itemTotal(code: string): number;

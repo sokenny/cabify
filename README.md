@@ -12,6 +12,10 @@ To Run in Dev Environment:
 
 `npm run dev`
 
+To Run in Prod:
+
+`npm run build && npm start`
+
 <br />
 
 # Project decisions and tradeoffs
@@ -130,7 +134,7 @@ The BEM convention may seem dismissed at a first glance. This is because we are 
 
 So from our source code we do not prefix our classes in the BEM manner, to avoid redundancy: <br/><br/>
 (class inside `ProductRow` component): `styles.image`<br/><br/>
-However the final result in the browser does follow a BEM pattern: `ProductRow_image__Nlbbg`
+However the final result in the browser does follow a BEM pattern: `ProductRow_image__[random_id]`
 
 <br />
 

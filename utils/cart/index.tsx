@@ -3,16 +3,22 @@ import type {
   Product,
   Discount,
   AppliedDiscount,
+  Subscriptions,
+  Cart,
 } from "../../types";
 
 export class Checkout implements ICheckout {
-  public cart: string[];
+  public cart: Cart;
   public products: Product[];
-  public subscriptions: React.Dispatch<React.SetStateAction<string[]>>[];
+  public subscriptions: Subscriptions;
   public discounts: Discount[];
 
-  constructor(products: Product[], discounts: Discount[] = []) {
-    this.cart = [];
+  constructor(
+    products: Product[],
+    discounts: Discount[] = [],
+    cart: Cart = []
+  ) {
+    this.cart = cart;
     this.products = products;
     this.subscriptions = [];
     this.discounts = discounts;
@@ -42,10 +48,8 @@ export class Checkout implements ICheckout {
     return this;
   }
 
-  subscribe(
-    stateVariable: React.Dispatch<React.SetStateAction<string[]>>
-  ): void {
-    this.subscriptions.push(stateVariable);
+  subscribe(setter: (cart: Cart) => void): void {
+    this.subscriptions.push(setter);
   }
 
   itemTotal(code: string): number {
