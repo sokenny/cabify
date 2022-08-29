@@ -18,7 +18,12 @@ const ProductDetailModal: React.FC<{ product: Product }> = ({ product }) => {
           {closeX()}
         </div>
         <div className={styles.image}>
-          <Image src={product.images[1]} layout="fill" objectFit="cover" />
+          <Image
+            src={product.images[1]}
+            layout="fill"
+            objectFit="cover"
+            alt={product.name}
+          />
         </div>
         <div className={styles.info}>
           <ul>

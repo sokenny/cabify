@@ -2,7 +2,7 @@
 
 .Cart{
     
-    main{
+    .main{
         position: fixed;
         top: 50%;
         left: 50%;
@@ -36,6 +36,12 @@
                 line-height: 24px;
                 letter-spacing: -0.18px;
             }
+        }
+    }
+
+    .main-hasModal{
+        aside{
+            display: none;
         }
     }
 }

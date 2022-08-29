@@ -147,8 +147,10 @@ function handleClickProduct() {
 ```
 
 Usually we will **not want multiple modals popping up simultaneously**. Keeping one top level variable dedicated to this makes it hard to abuse modals in our app and super easy to update from any component down in the tree.
+<br/>
+<br/>
 
-## Project directory structure
+# Project directory structure
 
 ├── api<br />
 ├── components<br />
