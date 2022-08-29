@@ -9,10 +9,10 @@ const ProductRow: React.FC<{ product: Product; checkout: Checkout }> = ({
   checkout,
 }) => {
   const { setModal } = useAppContext();
-  function handleScan() {
+  function handleAddItem() {
     checkout.scan(product.code);
   }
-  function handleRemove() {
+  function handleRemoveItem() {
     checkout.remove(product.code);
   }
   function handleClickProduct() {
@@ -30,7 +30,7 @@ const ProductRow: React.FC<{ product: Product; checkout: Checkout }> = ({
         </figure>
       </div>
       <div className={styles.colQuantity}>
-        <button className={styles.count} onClick={handleRemove}>
+        <button className={styles.count} onClick={handleRemoveItem}>
           -
         </button>
         <input
@@ -39,7 +39,7 @@ const ProductRow: React.FC<{ product: Product; checkout: Checkout }> = ({
           value={checkout.itemQty(product.code)}
           readOnly
         />
-        <button className={styles.count} onClick={handleScan}>
+        <button className={styles.count} onClick={handleAddItem}>
           +
         </button>
       </div>
