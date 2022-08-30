@@ -26,7 +26,7 @@ You can view this app live at: https://cabify.vercel.app/ 🥳
 
 The store has a shared state living in `/contexts/AppContext.tsx`. Its main responsibility is to provide the global data that might be needed across different UIs (not only the cart). Many lower level components require this data so I chose to place it in a shared state **to avoid heavy prop drilling**.
 
-The App is initialized by the async `initializeApp` function that will fetch the current products and discounts data from a db and update the state with them. Once this data is available, our checkout class is re-instanced and populated with the new data.
+The App is initialized by the async `initializeApp` function that will fetch the current products and discounts data from a db and update the state with them. Once this data is available, our checkout class is re-instantiated and populated with the new data.
 
 ```typescript
 useEffect(() => {
@@ -49,7 +49,7 @@ If it were about building the individual product pages or homepage, I would be f
 
 ## Checkout class implementation
 
-A checkout is instanced by passing the store's products and discounts. The latter is optional.
+A checkout is instantiated by passing the store's products and discounts. The latter is optional.
 
 ```typescript
 const checkout = new Checkout(products, discounts);
@@ -120,19 +120,17 @@ This way we can bind our state to changes in the `checkout` class, keep a synchr
 Discounts received from `getDiscounts` api call implement the following interface:
 
 ```typescript
-
 {
     type: "2-for-1" | "bulk";
     code: string;
     shouldBuy?: number;
     shouldDiscount?: number;
 }
-
 ```
 
 The `shouldBuy` and `shouldDiscount` parameters are only mandatory for `type:"bulk"` discounts.
 
-On every update of cart items, a validation is run to return the potential applied discounts. (See `getDiscountsApplied()` method of class `Checkout`). We get back an array of objects ready to be printed in the UI. Each object represents a row under _Order Summary -> Discounts_
+On every update of cart items, a validation is run to return the potential applied discounts (see `getDiscountsApplied()` method of class `Checkout`). We then get back an array of objects ready to be printed in the UI. Each object represents a row under _Order Summary -> Discounts_
 
 ```typescript
 {
@@ -145,13 +143,13 @@ On every update of cart items, a validation is run to return the potential appli
 
 Markup was broken down into components using **modular/atomic design principles**. Components made up of other components were placed under `/components/modules` while lower level primitives remain in `/components/elements`. Once the need to elaborate on more pages arises, it would be a good idea to have a `/components/layouts` containing the potential different layouts of the app.
 
-Styles were decoupled from the `globals.css` file and refactored in a pure way to each component (meaning you'll easily find what is altering the component style's under its related `Component.module.scss` file).
+**Styles were decoupled** from the `globals.css` file and refactored in a pure way to each component (meaning you'll easily find what is altering the component's styles under its corresponging `Component.module.scss` file).
 
 Only the basic stylings considered were kept in `globals.css` to provide the general style rules we won't be opting out of.
 
-The BEM convention may seem dismissed at a first glance. This is because we are now working with css modules where each class is already scoped to its corresponding component. We do not need to prefix each class by specifying its block. The css compiling process will take care of this for us.
+The BEM convention may seem dismissed at a first glance. This is because we are now working with css modules where **each class is already scoped to its corresponding component**. We do not need to prefix each class by specifying its block. The css compiling process will take care of this for us.
 
-So from our source code we do not prefix our classes in the BEM manner, to avoid redundancy: <br/><br/>
+Hence we do not prefix our classes from our source code in the BEM manner, to avoid redundancy: <br/><br/>
 (class inside `ProductRow` component): `styles.image`<br/><br/>
 However the final result in the browser does follow a BEM pattern: `ProductRow_image__[random_id]`
 
@@ -163,7 +161,6 @@ As a matter of personal perference I placed the modal at a top level. It is decl
 
 ```typescript
 const { setModal } = useAppContext();
-
 function handleClickProduct() {
   setModal(<ProductDetailModal product={product} />);
 }
