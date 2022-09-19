@@ -1,4 +1,5 @@
 # Cabify challenge 🎉
+Cabify's cart challenge for senior frontend engineer position. Expect to be ghosted even if you follow through exactly what they ask.
 
 # Installation and Setup Instructions
 
